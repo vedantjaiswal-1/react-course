@@ -1,24 +1,21 @@
 import React from "react";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
-
-
-const ul = document.createElement('ul');
-const li = document.createElement('li');
-
-ul.appendChild(li);
-
-li.appendChild(document.createTextNode('Home'));
+import { About } from "./Home/About";
+import { Footer } from "./Home/Footer";
+import { Header } from "./Home/Header";
 
 export const Home = () => {
+  const age = 24;
+  const education = {
+    degree: "B.E",
+    collage: "Amity University",
+    passing_year: 2020,
+  };
+
   return (
     <div>
       <Header />
-      <div>
-        <ul className="App-header">
-          <li>Home</li>
-          <li>Addition 2 + 2 = {2 + 2}</li>
-        </ul>
+      <div className="App-header">
+        <About name="Tony" age={age} education={education} />
       </div>
       <Footer />
     </div>
