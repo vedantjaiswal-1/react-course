@@ -1,29 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { HookExample } from "../Hook/HookExample";
+import { UseEffectExample } from "../Hook/UseEffectExample";
 
 export const About = (props: any) => {
-  const onSubmit = () => {
-    alert("Welcome to the InXcode");
-  };
-
-  const onSubmitEvent = (value: any) => {
-    alert(value);
-  };
-
   return (
     <div>
-      {/* using event */}
-      <button onClick={onSubmit}>Click Here</button>
-
-      <p />
-
-      {/*Passing argument to the event*/}
-      <button
-        onClick={() => {
-          onSubmitEvent("Passing argument Success");
-        }}
-      >
-        Click me
-      </button>
+      <HookExample />
+      <hr/>
+      <UseEffectExample />
     </div>
   );
 };
