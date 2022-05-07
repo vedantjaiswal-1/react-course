@@ -14,7 +14,7 @@ export const Home = () => {
   return (
     <div>
       <Header />
-      <div className="App-header">
+      <div>
         <About name="Tony" age={age} education={education} />
       </div>
       <Footer />
