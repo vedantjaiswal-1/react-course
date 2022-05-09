@@ -1,6 +1,5 @@
 import React from "react";
 import { About } from "./Home/About";
-import { Footer } from "./Home/Footer";
 import { Header } from "./Home/Header";
 
 export const Home = () => {
@@ -17,7 +16,6 @@ export const Home = () => {
       <div>
         <About name="Tony" age={age} education={education} />
       </div>
-      <Footer />
     </div>
   );
 };
