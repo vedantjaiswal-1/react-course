@@ -14,7 +14,7 @@ export const Header = () => {
               height="30"
               className="d-inline-block align-top"
             />
-            React Bootstrap
+            CRUD APP
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
