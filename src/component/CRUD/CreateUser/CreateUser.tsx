@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Card, Form, Button } from "react-bootstrap";
-
+import { Card, Button, FormGroup, FormLabel, FormControl } from "react-bootstrap";
+import {Formik, Form} from "formik";
 export const CreateUser = ({ addUser }: any) => {
   const initialState = {
     id: null,
@@ -27,27 +27,27 @@ export const CreateUser = ({ addUser }: any) => {
         <Card.Body>
           <h3>Create User</h3>
           <Form onSubmit={onSubmitForm}>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
+            <FormGroup className="mb-3" controlId="formBasicName">
+              <FormLabel>Name</FormLabel>
+              <FormControl
                 type="text"
                 placeholder="Enter name"
                 name="name"
                 value={user.name}
                 onChange={handleInputChange}
               />
-            </Form.Group>
+            </FormGroup>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
+            <FormGroup className="mb-3" controlId="formBasicEmail">
+              <FormLabel>Email</FormLabel>
+              <FormControl
                 type="email"
                 placeholder="Enter Email"
                 name="email"
                 value={user.email}
                 onChange={handleInputChange}
               />
-            </Form.Group>
+            </FormGroup>
 
             <Button variant="primary" type="submit">
               Submit
