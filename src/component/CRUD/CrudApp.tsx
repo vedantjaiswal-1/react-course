@@ -1,63 +1,76 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import UserService from "../Service/UserService";
 import { CreateUser } from "./CreateUser/CreateUser";
 import { EditUser } from "./EditUser/EditUser";
 import { ViewUser } from "./ViewUser/ViewUser";
 
 export const CrudApp = () => {
-  const userData = [
-    {
-      id: 1,
-      name: "Tony Stark",
-      email: "tony@gmail.com",
-    },
-    {
-      id: 2,
-      name: "Tom Cruise",
-      email: "tom@gmail.com",
-    },
-    {
-      id: 3,
-      name: "Robert Downey",
-      email: "robert@gmail.com",
-    },
-  ];
-
   const initialState = { id: null, name: "", email: "" };
 
-  const [users, setUsers] = useState(userData);
+  const [users, setUsers] = useState([]);
   const [editing, setEditing] = useState(false);
   const [currentUser, setCurrentUser] = useState(initialState);
 
+  const loadUser = () => {
+    UserService.listUser()
+      .then((response: any) => {
+        setUsers(response);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
   const addUser = (user: any) => {
-    user.id = users.length + 1;
-    setUsers([...users, user]);
+    UserService.createUser(user)
+      .then((response: any) => {
+        loadUser();
+        console.log(response);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
   };
 
   const editUser = (user: any) => {
     setEditing(true);
-    setCurrentUser({ id: user?.id, name: user?.name, email: user?.email });
+    setCurrentUser({ id: user?._id, name: user?.name, email: user?.email });
   };
 
-  const updateUser = (id: any, updateUser: any) => {
+  const updateUser = (id: any, user: any) => {
     setEditing(false);
-    setUsers(users.map((user: any) => (user.id === id ? updateUser : user)));
+    UserService.updateUser(id, user)
+      .then((response: any) => {
+        loadUser();
+        console.log(response);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
   };
 
   const deleteUser = (id: any) => {
-    setUsers(users.filter((user: any) => user.id !== id))
-  }
+    UserService.deleteUser(id)
+      .then((response: any) => {
+        loadUser();
+        console.log(response);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
 
   return (
     <Container>
       <Row>
         <Col lg={4}>
           {editing ? (
-            <EditUser
-              setEditing={setEditing}
-              currentUser={currentUser}
-              updateUser={updateUser}
-            />
+            <EditUser setEditing={setEditing} currentUser={currentUser} updateUser={updateUser} />
           ) : (
             <CreateUser addUser={addUser} />
           )}
