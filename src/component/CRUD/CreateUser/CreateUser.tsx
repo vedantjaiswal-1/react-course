@@ -4,13 +4,8 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 const UserSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too short!")
-    .max(50, "Too Long!")
-    .required("Name is required"),
-  email: Yup.string()
-    .email("Invalid email")
-    .required("Email is required")
+  name: Yup.string().min(2, "Too short!").max(50, "Too Long!").required("Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required")
 });
 
 export const CreateUser = ({ addUser }: any) => {
@@ -19,12 +14,10 @@ export const CreateUser = ({ addUser }: any) => {
     name: "",
     email: ""
   };
-  const [user, setUser] = useState(initialState);
 
   const onSubmitForm = (values: any) => {
-    addUser(values);
-    setUser(initialState);
-  };
+    addUser(values)
+  };  
 
   return (
     <React.Fragment>

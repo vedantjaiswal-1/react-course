@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Table } from "react-bootstrap";
+import UserService from "../../Service/UserService";
 
 export const ViewUser = ({ users, editUser, deleteUser }: any) => {
   return (
@@ -19,8 +20,8 @@ export const ViewUser = ({ users, editUser, deleteUser }: any) => {
             <tbody>
               {users?.map((item: any, index: number) => {
                 return (
-                  <tr key={item?.id}>
-                    <td>{item?.id}</td>
+                  <tr key={item?._id}>
+                    <td>{index + 1}</td>
                     <td>{item?.name}</td>
                     <td>{item?.email}</td>
                     <td>
@@ -30,15 +31,15 @@ export const ViewUser = ({ users, editUser, deleteUser }: any) => {
                           size="sm"
                           onClick={() => {
                             editUser(item);
+                            console.log(item?._id)
                           }}
                         >
                           Edit
                         </Button>{" "}
-                        <Button
-                          variant="outline-danger"
-                          size="sm"
-                          onClick={() => deleteUser(item.id)}
-                        >
+                        <Button 
+                          variant="outline-danger" 
+                          size="sm" 
+                          onClick={() => deleteUser(item._id)}>
                           Delete
                         </Button>
                       </>
